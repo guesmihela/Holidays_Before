@@ -105,7 +105,6 @@ class HrHolidays(models.Model):
         for holiday in self:
             if holiday.is_before and holiday.diff < holiday.val_before and self.not_allocation():
                 raise UserError("demande de congé doit etre  avant  : %r" " "  "jours" " "  % holiday.val_before)
-            self.env['hr.employee.holidays.approbation'].create({'holidays': holiday.id, 'approver': self.env.uid, 'date': fields.Datetime.now()})
         super(HrHolidays, self).action_validate()
     @api.model
     def create(self, values):
